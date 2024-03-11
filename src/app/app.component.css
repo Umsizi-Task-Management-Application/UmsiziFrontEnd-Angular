@@ -7,3 +7,20 @@ h6 {
   padding: 0%;
   margin-bottom: 4%;
 }
+
+.add-button {
+  display: flex;
+  justify-content: center;
+  padding-top: 4%;
+}
+#add-button {
+  background-color: rgb(117, 112, 190);
+  color: white;
+  width: 10vw;
+  height: 6vh;
+}
+#add-button:hover {
+  cursor: pointer;
+  background-color: rgb(25, 15, 160);
+  
+}
