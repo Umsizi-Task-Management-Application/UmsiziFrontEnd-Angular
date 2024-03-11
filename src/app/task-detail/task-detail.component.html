@@ -1,0 +1,9 @@
+<!-- task-detail.component.html -->
+<div class="task-detail">
+  <h2>Task Details</h2>
+  <div *ngIf="task">
+    <h3>{{ task?.title }}</h3>
+    <p>Deadline: {{ task?.deadline }}</p>
+    <p>Priority: {{ task?.priority }}</p>
+  </div>
+</div>

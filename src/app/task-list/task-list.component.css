@@ -1,0 +1,24 @@
+.columns {
+  display: flex;
+}
+
+ul li {
+  margin: 1vh 1vw;
+  border-radius: 10%;
+}
+ul li:hover {
+  cursor: pointer;
+}
+
+.column {
+  flex: 1;
+  /* width: 10px; */
+  border: 1px solid black; /* Optional: Add borders for visualization */
+  box-sizing: border-box; /* Ensure border width is included in width calculation */
+  text-align: center;
+}
+
+#Backlog {
+  font-weight: bolder;
+  font-size: xx-large;
+}

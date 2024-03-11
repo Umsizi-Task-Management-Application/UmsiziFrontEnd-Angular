@@ -1,0 +1,21 @@
+<!-- app.component.html -->
+<main class="container">
+  <header>
+    <h1>Task Management Application</h1>
+    <h3>{{ user.name }}</h3>
+    <h6>{{ user.email }}</h6>
+    <nav>
+      <!-- <a routerLink="/tasks">Tasks</a>
+      <a routerLink="/profile">Profile</a> -->
+    </nav>
+  </header>
+  <app-task-list
+    [tasks]="taskList"
+    [backlogTasksList]="backlogTasks"
+    [progressTasksList]="progressTasks"
+    [testingTasksList]="testingTasks"
+    [reviewTasksList]="reviewTasks"
+    [completeTasksList]="completeTasks"
+  ></app-task-list>
+  <!-- <router-outlet></router-outlet> -->
+</main>
