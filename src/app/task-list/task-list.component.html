@@ -8,8 +8,12 @@
         <li
           *ngFor="let task of backlogTasksList"
           [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+          (click)="selectTask(task)"
         >
           {{ task.title }} - {{ task.deadline }}
+          <br />
+          <button>Move to in-progess</button>
+          <button>Move to complete</button>
         </li>
       </ul>
     </span>
@@ -19,8 +23,13 @@
         <li
           *ngFor="let task of progressTasksList"
           [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+          (click)="selectTask(task)"
         >
           {{ task.title }} - {{ task.deadline }}
+          <br />
+          <button>Move to testing</button>
+          <button>Move to complete</button>
+          <button>Move to backlog</button>
         </li>
       </ul></span
     >
@@ -30,8 +39,14 @@
         <li
           *ngFor="let task of testingTasksList"
           [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+          (click)="selectTask(task)"
         >
           {{ task.title }} - {{ task.deadline }}
+          <br />
+          <button>Move to in-progress</button>
+          <button>Move to review</button>
+          <button>Move to complete</button>
+          <button>Move to backlog</button>
         </li>
       </ul></span
     >
@@ -41,8 +56,12 @@
         <li
           *ngFor="let task of reviewTasksList"
           [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+          (click)="selectTask(task)"
         >
           {{ task.title }} - {{ task.deadline }}
+          <br />
+          <button>Move to complete</button>
+          <button>Move to backlog</button>
         </li>
       </ul>
     </span>
@@ -52,8 +71,11 @@
         <li
           *ngFor="let task of completeTasksList"
           [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+          (click)="selectTask(task)"
         >
           {{ task.title }} - {{ task.deadline }}
+          <br />
+          <button>Move to backlog</button>
         </li>
       </ul>
     </span>

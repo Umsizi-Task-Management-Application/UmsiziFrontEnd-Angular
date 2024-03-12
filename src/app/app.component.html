@@ -16,9 +16,21 @@
     [testingTasksList]="testingTasks"
     [reviewTasksList]="reviewTasks"
     [completeTasksList]="completeTasks"
+    (taskSelected)="onTaskSelected($event)"
   ></app-task-list>
   <span class="add-button">
-    <button id="add-button">+ New Task </button>
+    <button id="add-button" (click)="showForm()">+ New Task</button>
   </span>
+  <app-task-detail
+    [taskSelected]="selectedTask"
+    (close)="closeTaskDetailPopup()"
+  >
+  </app-task-detail>
+  <div class="overlay" *ngIf="isFormVisible"></div>
+  <app-task-form
+    *ngIf="isFormVisible"
+    (formSubmit)="addTask($event)"
+    (cancelForm)="hideForm()"
+  ></app-task-form>
   <!-- <router-outlet></router-outlet> -->
 </main>

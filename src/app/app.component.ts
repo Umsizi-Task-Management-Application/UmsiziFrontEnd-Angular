@@ -13,12 +13,17 @@ export class AppComponent {
     name: 'Mxolisi Sibaya',
     email: 'mxolisi.gojolo@gmail.com',
   };
-  task: Task | undefined;
+  selectedTask: Task | undefined;
+
+  onTaskSelected(task: Task) {
+    this.selectedTask = task;
+  }
 
   taskList: Task[] = [
     {
       id: 1,
       title: 'Task 1',
+      description: 'Task 1 description',
       deadline: new Date(),
       priority: 'Low',
       stage: 'Backlog',
@@ -26,6 +31,7 @@ export class AppComponent {
     {
       id: 2,
       title: 'Task 2',
+      description: 'Task 2 description',
       deadline: new Date(),
       priority: 'High',
       stage: 'Backlog',
@@ -33,6 +39,7 @@ export class AppComponent {
     {
       id: 3,
       title: 'Task 3',
+      description: 'Task 3 description',
       deadline: new Date(),
       priority: 'Mid',
       stage: 'Backlog',
@@ -40,6 +47,7 @@ export class AppComponent {
     {
       id: 4,
       title: 'Task 4',
+      description: 'Task 4 description',
       deadline: new Date(),
       priority: 'Low',
       stage: 'Complete',
@@ -47,6 +55,7 @@ export class AppComponent {
     {
       id: 5,
       title: 'Task 5',
+      description: 'Task 5 description',
       deadline: new Date(),
       priority: 'High',
       stage: 'Review',
@@ -54,6 +63,7 @@ export class AppComponent {
     {
       id: 6,
       title: 'Task 6',
+      description: 'Task 6 description',
       deadline: new Date(),
       priority: 'Mid',
       stage: 'Backlog',
@@ -61,6 +71,7 @@ export class AppComponent {
     {
       id: 7,
       title: 'Task 7',
+      description: 'Task 7 description',
       deadline: new Date(),
       priority: 'Low',
       stage: 'Backlog',
@@ -68,6 +79,7 @@ export class AppComponent {
     {
       id: 8,
       title: 'Task 8',
+      description: 'Task 8 description',
       deadline: new Date(),
       priority: 'High',
       stage: 'Testing',
@@ -75,6 +87,7 @@ export class AppComponent {
     {
       id: 9,
       title: 'Task 9',
+      description: 'Task 9 description',
       deadline: new Date(),
       priority: 'Mid',
       stage: 'In-progress',
@@ -95,4 +108,26 @@ export class AppComponent {
   completeTasks: Task[] = this.taskList.filter(
     (task) => task.stage.toLowerCase() === 'complete'
   );
+
+  isFormVisible = false;
+
+  showForm() {
+    this.isFormVisible = true;
+    console.log(this.isFormVisible);
+  }
+
+  hideForm() {
+    this.isFormVisible = false;
+  }
+
+  addTask(task: Task) {
+    // Implement your logic to add task here
+    task.id = this.taskList.length + 1;
+    this.taskList.push(task);
+    console.log(this.taskList);
+    this.hideForm();
+  }
+  closeTaskDetailPopup() {
+    this.selectedTask = undefined;
+  }
 }

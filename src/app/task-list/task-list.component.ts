@@ -1,5 +1,5 @@
 // task-list.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 // import { TaskService } from '../task.service';
 import { Task } from '../task';
 
@@ -15,6 +15,13 @@ export class TaskListComponent implements OnInit {
   @Input() testingTasksList: Task[] = [];
   @Input() reviewTasksList: Task[] = [];
   @Input() completeTasksList: Task[] = [];
+  @Output() taskSelected = new EventEmitter<Task>();
+
+  // Other properties and methods...
+
+  selectTask(task: Task) {
+    this.taskSelected.emit(task);
+  }
 
   // constructor(private taskService: TaskService) { }
   constructor() {}
@@ -28,13 +35,13 @@ export class TaskListComponent implements OnInit {
   getPriorityColor(priority: string): string {
     switch (priority.toLowerCase()) {
       case 'high':
-        return 'red'; 
+        return 'red';
       case 'mid':
-        return 'yellow'; 
+        return 'yellow';
       case 'low':
-        return 'green'; 
+        return 'green';
       default:
-        return 'bisque'; 
+        return 'bisque';
     }
   }
 }

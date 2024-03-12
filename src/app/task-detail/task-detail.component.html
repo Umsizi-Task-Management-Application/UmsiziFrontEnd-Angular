@@ -1,9 +1,12 @@
 <!-- task-detail.component.html -->
-<div class="task-detail">
+<div class="task-detail" *ngIf="taskSelected">
   <h2>Task Details</h2>
-  <div *ngIf="task">
-    <h3>{{ task?.title }}</h3>
-    <p>Deadline: {{ task?.deadline }}</p>
-    <p>Priority: {{ task?.priority }}</p>
+  <div>
+    <h3>{{ taskSelected.title }}</h3>
+    <p>Description: {{ taskSelected.description }}</p>
+    <p>Deadline: {{ taskSelected.deadline }}</p>
+    <p>Priority: {{ taskSelected.priority }}</p>
+    <p>Stage: {{ taskSelected.stage }}</p>
   </div>
+  <button type="button" (click)="closeTask()" class="cancel">OK</button>
 </div>
