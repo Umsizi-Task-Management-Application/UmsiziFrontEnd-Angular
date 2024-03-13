@@ -8,6 +8,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TaskFormComponent } from './task-form/task-form.component';
 import { FormsModule } from '@angular/forms';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,10 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
     TaskListComponent,
     TaskFormComponent,
     TaskDetailComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })

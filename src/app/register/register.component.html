@@ -1,0 +1,21 @@
+<!-- (ngSubmit)="register()" -->
+<form >
+    <h2>UMSIZI REGISTER</h2>
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="email"
+    placeholder="Email"
+    required
+  />
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="password"
+    placeholder="Password"
+    required
+  />
+  <button type="submit">Register</button>
+  <button type="button">Already Registered? Login</button>
+</form>
+

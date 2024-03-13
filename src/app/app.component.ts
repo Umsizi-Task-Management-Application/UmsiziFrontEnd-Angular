@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Task } from './task';
 import { Profile } from './profile';
+import * as jwt from 'jsonwebtoken';
 
 @Component({
   selector: 'app-root',
@@ -8,112 +10,110 @@ import { Profile } from './profile';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  user: Profile | undefined;
+  userList: Profile[] | undefined;
+  backlogTasks: Task[] | undefined;
+  progressTasks: Task[] | undefined;
+  testingTasks: Task[] | undefined;
+  reviewTasks: Task[] | undefined;
+  completeTasks: Task[] | undefined;
+  constructor(private http: HttpClient) {}
+  ngOnInit() {
+    this.fetchUsers();
+  }
+  fetchUsers() {
+    this.http.get<any[]>('http://localhost:3000/getUsers').subscribe(
+      (users) => {
+        console.log('Users:', users);
+        this.userList = users;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+
+  UmsiziUsers: Profile[] = [];
   title = 'UmsiziFrontEnd-Angular';
-  user: Profile = {
-    name: 'Mxolisi Sibaya',
-    email: 'mxolisi.gojolo@gmail.com',
-  };
+  createNewTask(taskData: Task) {
+    this.http.post('http://localhost:3000/NewTask', taskData).subscribe(
+      (response) => {
+        console.log('Task created successfully:', response);
+        alert('You have successfully created a new task');
+
+        this.getuserTasks(this.user);
+      },
+      (error) => {
+        console.error('Error creating task:', error);
+      }
+    );
+    return;
+  }
+  isAuthenticated = false;
+  isNotAuthenticated = true;
+  getuserTasks(profile: Profile | undefined) {
+    const id = profile?.id;
+    this.http
+      .get<any[]>(`http://localhost:3000/getTasksForUser/${id}`)
+      .subscribe(
+        (tasks) => {
+          console.log('Tasks:', tasks);
+          this.taskList = tasks;
+
+          this.backlogTasks = this.taskList?.filter(
+            (task) => task.stage.toLowerCase() === 'backlog'
+          );
+          this.progressTasks = this.taskList?.filter(
+            (task) => task.stage.toLowerCase() === 'in-progress'
+          );
+          this.testingTasks = this.taskList?.filter(
+            (task) => task.stage.toLowerCase() === 'testing'
+          );
+          this.reviewTasks = this.taskList?.filter(
+            (task) => task.stage.toLowerCase() === 'review'
+          );
+          this.completeTasks = this.taskList?.filter(
+            (task) => task.stage.toLowerCase() === 'complete'
+          );
+        },
+        (error) => {
+          console.error('Error fetching users:', error);
+        }
+      );
+  }
+  updateStage(taskData: any) {
+    this.http.put('http://localhost:3000/updateStage', taskData).subscribe(
+      () => {
+        console.log(`Task updated :`);
+
+        this.getuserTasks(this.user);
+      },
+      (error) => {
+        console.error('Error updating task:', error);
+      }
+    );
+  }
+  login(profile: Profile) {
+    this.user = profile;
+    this.getuserTasks(this.user);
+    this.isAuthenticated = true;
+    this.isNotAuthenticated = false;
+  }
   selectedTask: Task | undefined;
 
   onTaskSelected(task: Task) {
     this.selectedTask = task;
   }
+  onStageChanged(task: Task) {
+    this.updateStage({ stage: task.stage, id: task.id, title: task.title });
+  }
 
-  taskList: Task[] = [
-    {
-      id: 1,
-      title: 'Task 1',
-      description: 'Task 1 description',
-      deadline: new Date(),
-      priority: 'Low',
-      stage: 'Backlog',
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-      description: 'Task 2 description',
-      deadline: new Date(),
-      priority: 'High',
-      stage: 'Backlog',
-    },
-    {
-      id: 3,
-      title: 'Task 3',
-      description: 'Task 3 description',
-      deadline: new Date(),
-      priority: 'Mid',
-      stage: 'Backlog',
-    },
-    {
-      id: 4,
-      title: 'Task 4',
-      description: 'Task 4 description',
-      deadline: new Date(),
-      priority: 'Low',
-      stage: 'Complete',
-    },
-    {
-      id: 5,
-      title: 'Task 5',
-      description: 'Task 5 description',
-      deadline: new Date(),
-      priority: 'High',
-      stage: 'Review',
-    },
-    {
-      id: 6,
-      title: 'Task 6',
-      description: 'Task 6 description',
-      deadline: new Date(),
-      priority: 'Mid',
-      stage: 'Backlog',
-    },
-    {
-      id: 7,
-      title: 'Task 7',
-      description: 'Task 7 description',
-      deadline: new Date(),
-      priority: 'Low',
-      stage: 'Backlog',
-    },
-    {
-      id: 8,
-      title: 'Task 8',
-      description: 'Task 8 description',
-      deadline: new Date(),
-      priority: 'High',
-      stage: 'Testing',
-    },
-    {
-      id: 9,
-      title: 'Task 9',
-      description: 'Task 9 description',
-      deadline: new Date(),
-      priority: 'Mid',
-      stage: 'In-progress',
-    },
-  ];
-  backlogTasks: Task[] = this.taskList.filter(
-    (task) => task.stage.toLowerCase() === 'backlog'
-  );
-  progressTasks: Task[] = this.taskList.filter(
-    (task) => task.stage.toLowerCase() === 'in-progress'
-  );
-  testingTasks: Task[] = this.taskList.filter(
-    (task) => task.stage.toLowerCase() === 'testing'
-  );
-  reviewTasks: Task[] = this.taskList.filter(
-    (task) => task.stage.toLowerCase() === 'review'
-  );
-  completeTasks: Task[] = this.taskList.filter(
-    (task) => task.stage.toLowerCase() === 'complete'
-  );
+  taskList: Task[] | undefined = [];
 
   isFormVisible = false;
 
   showForm() {
     this.isFormVisible = true;
-    console.log(this.isFormVisible);
   }
 
   hideForm() {
@@ -121,10 +121,11 @@ export class AppComponent {
   }
 
   addTask(task: Task) {
-    // Implement your logic to add task here
-    task.id = this.taskList.length + 1;
-    this.taskList.push(task);
+    task.id = this.user ? this.user.id : -1;
+
+    this.createNewTask(task);
     console.log(this.taskList);
+
     this.hideForm();
   }
   closeTaskDetailPopup() {

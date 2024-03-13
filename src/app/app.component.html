@@ -1,14 +1,26 @@
+<app-login
+  (loggedInProfile)="login($event)"
+  [UmsiziUsers]="userList"
+  *ngIf="isNotAuthenticated"
+></app-login>
+
 <!-- app.component.html -->
-<main class="container">
+<main class="container" *ngIf="isAuthenticated">
   <header>
-    <h1>Task Management Application</h1>
-    <h3>{{ user.name }}</h3>
-    <h6>{{ user.email }}</h6>
+    <h1><img src="../../assets/Umsizi-logo.png" alt="Umsizi logo" /><br /></h1>
+    <span id="details">
+      <h3>{{ user?.name }}</h3>
+      <h6>{{ user?.email }}</h6>
+    </span>
     <nav>
       <!-- <a routerLink="/tasks">Tasks</a>
       <a routerLink="/profile">Profile</a> -->
     </nav>
   </header>
+  <span class="add-button">
+    <button id="add-button" (click)="showForm()">+ New Task</button>
+  </span>
+  <br />
   <app-task-list
     [tasks]="taskList"
     [backlogTasksList]="backlogTasks"
@@ -17,10 +29,9 @@
     [reviewTasksList]="reviewTasks"
     [completeTasksList]="completeTasks"
     (taskSelected)="onTaskSelected($event)"
+    (updateStage)="onStageChanged($event)"
   ></app-task-list>
-  <span class="add-button">
-    <button id="add-button" (click)="showForm()">+ New Task</button>
-  </span>
+
   <app-task-detail
     [taskSelected]="selectedTask"
     (close)="closeTaskDetailPopup()"

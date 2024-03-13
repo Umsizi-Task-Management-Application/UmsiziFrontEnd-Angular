@@ -1,82 +1,103 @@
 <!-- task-list.component.html -->
 <article class="task-list">
-  <h2>Task List</h2>
   <article class="columns">
     <span class="column"
-      ><span id="Backlog"> Backlog</span>
-      <ul>
-        <li
-          *ngFor="let task of backlogTasksList"
-          [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
-          (click)="selectTask(task)"
-        >
-          {{ task.title }} - {{ task.deadline }}
+      ><span id="Backlog"
+        ><br />
+        Backlog</span
+      >
+      <ul
+        *ngFor="let task of backlogTasksList"
+        [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+      >
+        <li (click)="selectTask(task)">
+          {{ task.title }}
           <br />
-          <button>Move to in-progess</button>
-          <button>Move to complete</button>
         </li>
+        <button (click)="updateTaskStage(task, 'in-progress')">
+          Move to in-progess
+        </button>
+        <button (click)="updateTaskStage(task, 'complete')">
+          Move to complete
+        </button>
       </ul>
     </span>
     <span class="column"
-      ><span id="Backlog">In-progress</span>
-      <ul>
-        <li
-          *ngFor="let task of progressTasksList"
-          [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
-          (click)="selectTask(task)"
-        >
-          {{ task.title }} - {{ task.deadline }}
+      ><span id="Backlog"><br />In-progress</span>
+      <ul
+        [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+        *ngFor="let task of progressTasksList"
+      >
+        <li (click)="selectTask(task)">
+          {{ task.title }}
           <br />
-          <button>Move to testing</button>
-          <button>Move to complete</button>
-          <button>Move to backlog</button>
         </li>
+        <button (click)="updateTaskStage(task, 'testing')">
+          Move to testing
+        </button>
+        <button (click)="updateTaskStage(task, 'complete')">
+          Move to complete
+        </button>
+        <button (click)="updateTaskStage(task, 'backlog')">
+          Move to backlog
+        </button>
       </ul></span
     >
     <span class="column"
-      ><span id="Backlog">Testing</span>
-      <ul>
-        <li
-          *ngFor="let task of testingTasksList"
-          [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
-          (click)="selectTask(task)"
-        >
-          {{ task.title }} - {{ task.deadline }}
+      ><span id="Backlog"><br />Testing</span>
+      <ul
+        *ngFor="let task of testingTasksList"
+        [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+      >
+        <li (click)="selectTask(task)">
+          {{ task.title }}
           <br />
-          <button>Move to in-progress</button>
-          <button>Move to review</button>
-          <button>Move to complete</button>
-          <button>Move to backlog</button>
         </li>
+        <button (click)="updateTaskStage(task, 'in-progess')">
+          Move to in-progress
+        </button>
+        <button (click)="updateTaskStage(task, 'review')">
+          Move to review
+        </button>
+        <button (click)="updateTaskStage(task, 'complete')">
+          Move to complete
+        </button>
+        <button (click)="updateTaskStage(task, 'backlog')">
+          Move to backlog
+        </button>
       </ul></span
     >
     <span class="column"
-      ><span id="Backlog">Review</span>
-      <ul>
-        <li
-          *ngFor="let task of reviewTasksList"
-          [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
-          (click)="selectTask(task)"
-        >
-          {{ task.title }} - {{ task.deadline }}
+      ><span id="Backlog"><br />Review</span>
+      <ul
+        *ngFor="let task of reviewTasksList"
+        [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+      >
+        <li (click)="selectTask(task)">
+          {{ task.title }}
           <br />
-          <button>Move to complete</button>
-          <button>Move to backlog</button>
         </li>
+        <button (click)="updateTaskStage(task, 'complete')">
+          Move to complete
+        </button>
+        <button (click)="updateTaskStage(task, 'backlog')">
+          Move to backlog
+        </button>
       </ul>
     </span>
     <span class="column"
-      ><span id="Backlog">Complete</span>
-      <ul>
-        <li
-          *ngFor="let task of completeTasksList"
-          [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
-          (click)="selectTask(task)"
-        >
-          {{ task.title }} - {{ task.deadline }}
+      ><span id="Backlog"><br />Complete</span>
+      <ul
+        *ngFor="let task of completeTasksList"
+        [ngStyle]="{ 'background-color': getPriorityColor(task.priority) }"
+      >
+        <li (click)="selectTask(task)">
+          {{ task.title }}
           <br />
-          <button>Move to backlog</button>
         </li>
+        <button (click)="updateTaskStage(task, 'backlog')">
+          Move to backlog
+        </button>
       </ul>
     </span>
   </article>

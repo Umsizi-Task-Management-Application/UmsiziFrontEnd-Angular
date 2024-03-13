@@ -1,6 +1,4 @@
-// task-list.component.ts
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-// import { TaskService } from '../task.service';
 import { Task } from '../task';
 
 @Component({
@@ -9,28 +7,29 @@ import { Task } from '../task';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  @Input() tasks: Task[] = [];
-  @Input() backlogTasksList: Task[] = [];
-  @Input() progressTasksList: Task[] = [];
-  @Input() testingTasksList: Task[] = [];
-  @Input() reviewTasksList: Task[] = [];
-  @Input() completeTasksList: Task[] = [];
+  @Input() tasks: Task[] | undefined = [];
+  @Input() backlogTasksList: Task[] | undefined = [];
+  @Input() progressTasksList: Task[] | undefined = [];
+  @Input() testingTasksList: Task[] | undefined = [];
+  @Input() reviewTasksList: Task[] | undefined = [];
+  @Input() completeTasksList: Task[] | undefined = [];
   @Output() taskSelected = new EventEmitter<Task>();
-
-  // Other properties and methods...
+  @Output() updateStage = new EventEmitter<Task>();
 
   selectTask(task: Task) {
     this.taskSelected.emit(task);
   }
 
-  // constructor(private taskService: TaskService) { }
   constructor() {}
 
-  ngOnInit(): void {
-    // this.getTasks();
-  }
+  ngOnInit(): void {}
 
   getTasks(): void {}
+
+  updateTaskStage(task: Task, newStatus: string): void {
+    task.stage = newStatus;
+    this.updateStage.emit(task);
+  }
 
   getPriorityColor(priority: string): string {
     switch (priority.toLowerCase()) {

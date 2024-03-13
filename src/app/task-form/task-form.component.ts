@@ -30,7 +30,7 @@ export class TaskFormComponent {
       priority: this.priority,
       stage: 'Backlog',
     };
-    alert('You have successfully created a new task');
+
     this.formSubmit.emit(task);
     this.resetForm();
   }

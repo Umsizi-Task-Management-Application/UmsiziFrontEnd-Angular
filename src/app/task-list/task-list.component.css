@@ -2,7 +2,7 @@
   display: flex;
 }
 
-ul li {
+ul {
   margin: 1vh 1vw;
   border-radius: 10%;
 }
@@ -21,4 +21,13 @@ ul li:hover {
 #Backlog {
   font-weight: bolder;
   font-size: xx-large;
+  color: #007bff;
+}
+button {
+  background-color: #ffffff; /* Blue color, adjust as needed */
+  color: #000000;
+}
+button:hover {
+  background-color: #50555b;
+  cursor: pointer;
 }

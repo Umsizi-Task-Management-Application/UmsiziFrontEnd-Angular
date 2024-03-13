@@ -1,10 +1,9 @@
 // task.ts
 export interface Task {
-    id: number;
+  id: number;
   title: string;
-  description: string
+  description: string;
   deadline: Date;
   priority: string;
-  stage: string
-  }
-  
+  stage: string;
+}
