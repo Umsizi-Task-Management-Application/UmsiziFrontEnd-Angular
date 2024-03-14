@@ -9,9 +9,13 @@ import { Profile } from '../profile';
 export class LoginComponent {
   @Input() UmsiziUsers: Profile[] | undefined = [];
   @Output() loggedInProfile = new EventEmitter<Profile>();
+  @Output() registerTrigger = new EventEmitter<void>();
   email: string = '';
   password: string = '';
 
+  register() {
+    this.registerTrigger.emit();
+  }
   submitLogin() {
     if (this.UmsiziUsers) {
       for (const profile of this.UmsiziUsers) {

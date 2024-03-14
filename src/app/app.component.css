@@ -21,7 +21,7 @@ h1 {
 }
 #add-button {
   padding: 10px 20px;
-  background-color: #007bff; /* Blue color, adjust as needed */
+  background-color: #007bff; 
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -33,13 +33,13 @@ h1 {
   background-color: rgb(25, 15, 160);
 }
 
-/* CSS for the overlay */
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
-  z-index: 1000; /* Ensure the overlay is above other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; 
 }

@@ -12,9 +12,9 @@ ul li:hover {
 
 .column {
   flex: 1;
-  /* width: 10px; */
-  border: 1px solid black; /* Optional: Add borders for visualization */
-  box-sizing: border-box; /* Ensure border width is included in width calculation */
+
+  border: 1px solid black; 
+  box-sizing: border-box; 
   text-align: center;
 }
 
@@ -24,7 +24,7 @@ ul li:hover {
   color: #007bff;
 }
 button {
-  background-color: #ffffff; /* Blue color, adjust as needed */
+  background-color: #ffffff; 
   color: #000000;
 }
 button:hover {

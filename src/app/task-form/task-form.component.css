@@ -21,8 +21,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 1000; /* Ensure it's above other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; 
 }
 
 /* Task form styling */
@@ -61,7 +61,7 @@
 /* Form button styling */
 .task-form button {
   padding: 10px 20px;
-  background-color: #007bff; /* Blue color, adjust as needed */
+  background-color: #007bff; 
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -71,15 +71,14 @@
 
 /* Cancel button styling */
 .task-form button.cancel {
-  background-color: #dc3545; /* Red color, adjust as needed */
+  background-color: #dc3545; 
 }
 
 /* Form button hover effect */
 .task-form button:hover {
-  background-color: #0056b3; /* Darker shade of blue */
+  background-color: #0056b3; 
 }
 .task-form button.cancel:hover {
-  background-color: #ff152d; /* Red color, adjust as needed */
+  background-color: #ff152d; 
 }
 
-/* Optional: Add additional styling as needed */

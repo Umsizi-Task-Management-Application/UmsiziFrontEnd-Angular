@@ -1,4 +1,3 @@
-<!-- (ngSubmit)="login()" -->
 <form (ngSubmit)="submitLogin()">
   <span id="logo">
     <img src="../../assets/Umsizi-logo.png" alt="Umsizi logo" />
@@ -13,14 +12,7 @@
     placeholder="Email"
     required
   />
-  <!-- <input
-    type="password"
-    name="password"
-    [(ngModel)]="password"
-    placeholder="Password"
-    required
-  /> -->
-  <button type="submit">Login</button>
-  <button type="button">Not Registered? signup</button>
+
+  <button type="submit" >Login</button>
+  <button type="button" (click)="register()">Not Registered? Register</button>
 </form>
-<link rel="stylesheet" href="./login.component.css" />

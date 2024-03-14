@@ -1,7 +1,15 @@
+<app-register
+  *ngIf="!isRegistered"
+  (loginTrigger)="onloginTrigger()"
+  (registerTrigger)="registerUser($event)"
+>
+</app-register>
+
 <app-login
   (loggedInProfile)="login($event)"
   [UmsiziUsers]="userList"
   *ngIf="isNotAuthenticated"
+  (registerTrigger)="onregisterTrigger()"
 ></app-login>
 
 <!-- app.component.html -->
@@ -12,10 +20,7 @@
       <h3>{{ user?.name }}</h3>
       <h6>{{ user?.email }}</h6>
     </span>
-    <nav>
-      <!-- <a routerLink="/tasks">Tasks</a>
-      <a routerLink="/profile">Profile</a> -->
-    </nav>
+    <nav></nav>
   </header>
   <span class="add-button">
     <button id="add-button" (click)="showForm()">+ New Task</button>
@@ -38,10 +43,10 @@
   >
   </app-task-detail>
   <div class="overlay" *ngIf="isFormVisible"></div>
+  <div class="overlay" *ngIf="isTaskSelected"></div>
   <app-task-form
     *ngIf="isFormVisible"
     (formSubmit)="addTask($event)"
     (cancelForm)="hideForm()"
   ></app-task-form>
-  <!-- <router-outlet></router-outlet> -->
 </main>

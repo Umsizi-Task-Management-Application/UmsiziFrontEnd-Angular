@@ -1,6 +1,18 @@
-<!-- (ngSubmit)="register()" -->
-<form >
-    <h2>UMSIZI REGISTER</h2>
+<!-- -->
+<form (ngSubmit)="register()">
+  <span id="logo">
+    <img src="../../assets/Umsizi-logo.png" alt="Umsizi logo" />
+  </span>
+  <br />
+  <h2>REGISTER</h2>
+  <h5 id="response"></h5>
+  <input
+    type="text"
+    name="name"
+    [(ngModel)]="name"
+    placeholder="Full Name"
+    required
+  />
   <input
     type="email"
     name="email"
@@ -8,14 +20,7 @@
     placeholder="Email"
     required
   />
-  <input
-    type="password"
-    name="password"
-    [(ngModel)]="password"
-    placeholder="Password"
-    required
-  />
-  <button type="submit">Register</button>
-  <button type="button">Already Registered? Login</button>
-</form>
 
+  <button type="submit">Register</button>
+  <button type="button" (click)="login()">Already Registered? Login</button>
+</form>

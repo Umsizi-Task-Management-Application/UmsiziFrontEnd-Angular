@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from './task';
 import { Profile } from './profile';
 import * as jwt from 'jsonwebtoken';
+import { User } from './user';
 
 @Component({
   selector: 'app-root',
@@ -51,6 +52,26 @@ export class AppComponent {
   }
   isAuthenticated = false;
   isNotAuthenticated = true;
+  isRegistered = true;
+  onregisterTrigger() {
+    this.isRegistered = false;
+    this.isNotAuthenticated = false;
+  }
+  onloginTrigger() {
+    this.isRegistered = true;
+    this.isNotAuthenticated = true;
+  }
+  registerUser(userData: User) {
+    this.http.post('http://localhost:3000/Newuser', userData).subscribe(
+      (response) => {
+        console.log('User created successfully:', response);
+        alert(`You have successfully created a new User ${userData.name}`);
+      },
+      (error) => {
+        console.error('Error creating User:', error);
+      }
+    );
+  }
   getuserTasks(profile: Profile | undefined) {
     const id = profile?.id;
     this.http
@@ -100,8 +121,10 @@ export class AppComponent {
     this.isNotAuthenticated = false;
   }
   selectedTask: Task | undefined;
+  isTaskSelected = false;
 
   onTaskSelected(task: Task) {
+    this.isTaskSelected = true;
     this.selectedTask = task;
   }
   onStageChanged(task: Task) {
@@ -129,6 +152,7 @@ export class AppComponent {
     this.hideForm();
   }
   closeTaskDetailPopup() {
+    this.isTaskSelected = false;
     this.selectedTask = undefined;
   }
 }

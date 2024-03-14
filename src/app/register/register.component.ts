@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { User } from '../user';
 
 @Component({
   selector: 'app-register',
@@ -6,6 +7,15 @@ import { Component } from '@angular/core';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  @Output() loginTrigger = new EventEmitter<void>();
+  @Output() registerTrigger = new EventEmitter<User>();
   email: string = '';
-  password: string = '';
+  name: string = '';
+
+  login() {
+    this.loginTrigger.emit();
+  }
+  register() {
+    this.registerTrigger.emit({ email: this.email, name: this.name });
+  }
 }
